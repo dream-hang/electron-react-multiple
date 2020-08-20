@@ -8,10 +8,15 @@
 		"@testing-library/jest-dom": "^4.2.4",
 		"@testing-library/react": "^9.3.2",
 		"@testing-library/user-event": "^7.1.2",
+		"adm-zip": "^0.4.16",
+		"axios": "git+https://github.com/dream-hang/axios.git#c4d1d35845e57380ea27efd9c445b96bf84337f6",
 		"electron-is-dev": "^1.2.0",
+		"fs-extra": "^9.0.1",
+		"lowdb": "^1.0.0",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
-		"react-scripts": "3.4.3"
+		"react-scripts": "3.4.3",
+		"sudo-prompt": "^9.2.1"
 	},
 	"scripts": {
 		"start": "cross-env PORT=4000 react-app-rewired start",
@@ -20,6 +25,40 @@
 		"eject": "react-app-rewired eject",
 		"dev": "concurrently \"cross-env BROWSER=none npm run start\" \"wait-on http://localhost:4000 && electron .\""
 	},
+	"build": {
+        "appId": "com.hang.dream",
+        "productName": "测试平台",
+        "asar": true,
+        "asarUnpack": [
+            "./build",
+            "./package.json"
+        ],
+        "directories": {
+            "output": "./electron_builder_output",
+            "buildResources": "build"
+        },
+        "publish": [
+            {
+                "provider": "generic",
+                "url": "http://test.hang.com/studio"
+            }
+        ],
+        "mac": {
+            "category": "com.hang.dream",
+            "icon": "./build/logo192.png"
+        },
+        "win": {
+            "icon": "./build/favicon.ico"
+        },
+        "nsis": {
+            "oneClick": false,
+            "perMachine": true,
+            "allowToChangeInstallationDirectory": true,
+            "createDesktopShortcut": true,
+            "createStartMenuShortcut": true
+        },
+        "compression": "maximum"
+    },
 	"eslintConfig": {
 		"extends": "react-app"
 	},
@@ -40,6 +79,7 @@
 		"cross-env": "^7.0.2",
 		"customize-cra": "^1.0.0",
 		"electron": "^9.2.0",
+		"electron-builder": "^22.8.0",
 		"react-app-rewired": "^2.1.6",
 		"wait-on": "^5.2.0"
 	}

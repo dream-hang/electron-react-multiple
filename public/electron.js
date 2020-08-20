@@ -19,8 +19,8 @@ function createWindow() {
             height: 800,
             title: '测试平台',
             webPreferences: {
-                webSecurity: false,
-                nodeIntegration: true
+                nodeIntegration: true,
+                preload: path.join(__dirname, 'preload.js')
             }
         }
     )
