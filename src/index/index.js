@@ -1,12 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App/App';
+import Router from './router'
 import * as serviceWorker from './serviceWorker';
+import ErrorBoundary from '../common/ErrorBoundary'
+import { HashRouter } from 'react-router-dom'
 
 ReactDOM.render(
 	<React.StrictMode>
-		<App />
+		<ErrorBoundary>
+			<HashRouter>
+				<Router />
+			</HashRouter>
+		</ErrorBoundary>
 	</React.StrictMode>,
 	document.getElementById('root')
 );

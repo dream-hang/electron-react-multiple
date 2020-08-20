@@ -18,6 +18,7 @@ function App() {
 		console.log(DB.get("data"));
 	}
 	const toPopupFn = () => {
+		DB.set('islogin',0)
 		setCount(count=>count+1)
 	}
 	const inputChange = (e) => {

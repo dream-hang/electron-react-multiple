@@ -9,11 +9,11 @@ let db = ""
 if (isElectron()) {
     STORE_PATH = window.remote.app.getPath('userData') 
     if (process.type !== 'renderer') {
-        if (!window.fs.pathExistsSync(STORE_PATH)) { // 如果不存在路径
-            window.fs.mkdirpSync(STORE_PATH) // 就创建
+        if (!window.fs.pathExistsSync(STORE_PATH)) { 
+            window.fs.mkdirpSync(STORE_PATH) 
         }
     }
-    const adapter = new window.FileSync(path.join(STORE_PATH, '/db.json')) // 初始化lowdb读写的json文件名以及存储路径
+    const adapter = new window.FileSync(path.join(STORE_PATH, '/db.json'))
     db = low(adapter)
 } else {
     const adapter = new LocalStorage('db')
@@ -23,8 +23,8 @@ if (isElectron()) {
 const DB = {}
 
 DB.get = (name) => {
-    if (!db.has(name).value()) { // 先判断该值存不存在
-        db.set(name, '').write() // 不存在就创建
+    if (!db.has(name).value()) {
+        db.set(name, '').write()
     }
     return db.read().get(name).value();
 }
@@ -37,4 +37,4 @@ DB.set = (name, value) => {
     db.read().set(name , value).write();
 }
 
-export default DB // 暴露出去
+export default DB 
