@@ -8,11 +8,10 @@ const isDev = require('electron-is-dev');
 let mainWindow;             // 主窗口
 let popupWindow;            // 第二窗口
 
-// 禁用GPU加速
+// 禁用GPU加速 如果不禁止部分win7系统中会导致黑屏
 app.disableHardwareAcceleration()
 // 主窗口显示
 function createWindow() {
-    // 创建浏览器窗口,宽高自定义具体大小你开心就好
     mainWindow = new BrowserWindow(
         {
             width: 1200,
@@ -46,11 +45,10 @@ function createWindow() {
         mainWindow.show();
     })
     tray.setContextMenu(contextMenu);
-    if (isDev) { // 开发环境
+    if (isDev) {    // 开发环境
         mainWindow.loadURL('http://localhost:4000/');
-        // 打开开发者工具
         mainWindow.webContents.openDevTools()
-    } else { // 生产环境
+    } else {        // 生产环境
         mainWindow.loadURL(url.format({
             pathname: path.join(__dirname, 'index.html'),
             protocol: 'file:',

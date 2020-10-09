@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import logo from '../logo.svg';
 import './App.css';
 import { download, unpackPath } from '../../common/api/download';
+import { judgeOS } from '../../common/common';
 import DB from '../../common/db/db';
 
 function App() {
 	const [count, setCount] = useState(0);
 	useEffect(() => {
-		console.log('挂载');
 		initDB()
 		return () => {
 			console.log('卸载');
@@ -24,22 +24,6 @@ function App() {
 	const inputChange = (e) => {
 		setCount(e.target.value)
 	}
-	/**
-     * 判断系统版本
-     */
-    const judgeOS = () =>{
-        var agent = navigator.userAgent.toLowerCase();
-        var isMac = /macintosh|mac os x/i.test(navigator.userAgent);
-        if (agent.indexOf("win32") >= 0 || agent.indexOf("wow32") >= 0) {
-            return {name: 'win', code: 32}
-        }
-        if (agent.indexOf("win64") >= 0 || agent.indexOf("wow64") >= 0) {
-            return {name: 'win', code: 64}
-        }
-        if(isMac){
-            return {name: 'mac', code: 64}
-        }
-    }
 	/**
      * 更改下载目录的读取写入权限 如果软件安装在windows环境下的C盘 需要提高权限才可以替换文件 
 	 * 如果在打包时整体提高软件权限 那全量更新时会导致安装不上的问题

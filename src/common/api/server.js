@@ -25,7 +25,7 @@ axios.interceptors.request.use((config) => {
         requestList.push(request)
     }
     const token = ''
-    if (token && token != '') {
+    if (token && token !== '') {
         config.headers.Token = token;
     }
     return config
@@ -60,7 +60,7 @@ axios.interceptors.response.use(function (response) {
 const request = function (url, params, config, method) {
     return new Promise((resolve, reject) => {
         axios[method](url, params, Object.assign({}, config)).then(response => {
-            if (response.data.status == 1) {
+            if (response.data.status === 1) {
                 resolve(response.data)
             } else {
                 reject(response.data);

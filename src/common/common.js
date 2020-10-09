@@ -20,7 +20,24 @@ function isElectron() {
 
     return false;
 }
+/**
+ * 判断系统版本
+ */
+const judgeOS = () =>{
+    var agent = navigator.userAgent.toLowerCase();
+    var isMac = /macintosh|mac os x/i.test(navigator.userAgent);
+    if (agent.indexOf("win32") >= 0 || agent.indexOf("wow32") >= 0) {
+        return {name: 'win', code: 32}
+    }
+    if (agent.indexOf("win64") >= 0 || agent.indexOf("wow64") >= 0) {
+        return {name: 'win', code: 64}
+    }
+    if(isMac){
+        return {name: 'mac', code: 64}
+    }
+}
 
 export{
-    isElectron
+    isElectron,
+    judgeOS
 } 
